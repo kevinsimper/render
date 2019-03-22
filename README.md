@@ -1,16 +1,17 @@
 # render
 
-[![CircleCI](https://circleci.com/gh/sgreben/render.svg?style=svg)](https://circleci.com/gh/sgreben/render) [![Docker Repository on Quay](https://quay.io/repository/sergey_grebenshchikov/render/status "Docker Repository on Quay")](https://quay.io/repository/sergey_grebenshchikov/render)
-
 A flexible go-template renderer.
 
 ```bash
-docker pull quay.io/sergey_grebenshchikov/render
+docker run kevin/render
 ```
 
-```bash
-go get -u github.com/sgreben/render/cmd/render
+Example:
+https://github.com/kevinsimper/nodejs-cloudbuild-kubernetes/blob/master/cloudbuild.yaml#L6-L12
 ```
+render -f /workspace/kubernetes/deployment.yml -var sha=$COMMIT_SHA -o /workspace
+```
+
 
 - Template definitions can be given as command-line arguments (`-template`, `-t`), or read from files (`-template-file`, `-f`, `-template-files`).
 - Variable definitions can be given as command-line arguments (`-var`), taken from the environment (`-var-env`), or read from JSON / YAML / TOML files (`-var-file`).
@@ -18,6 +19,10 @@ go get -u github.com/sgreben/render/cmd/render
 The template syntax is described at <https://golang.org/pkg/text/template>
 
 ## Examples
+
+```bash
+$ render -f deployment.yml -var sha=$COMMIT_SHA
+```
 
 ```bash
 $ render -var foo=bar -t "value of foo: {{ .foo }}"
